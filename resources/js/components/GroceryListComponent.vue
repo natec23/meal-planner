@@ -3,7 +3,7 @@
         <div v-for="category in categories" :key="category.id" class="card">
             <div class="card-header" v-bind:style="{ 'background-color': category.color }" v-if="typeof groceryItems[category.id] != 'undefined'">{{ category.name }}</div>
             <ul class="list-group list-group-flush">
-                <grocery-item v-for="item in groceryItems[category.id]" :key="item.id" v-bind:item="item" v-bind:list_id="list"></grocery-item>
+                <grocery-item v-for="item in groceryItems[category.id]" :key="item.id" v-bind:item="item" v-bind:list_id="list" v-bind:category="category" v-bind:categories="categories"></grocery-item>
             </ul>
         </div>
     </div>

@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Grocery;
 use App\Http\Controllers\Controller;
 use App\Models\Grocery\Item;
 use App\Models\Grocery\GroceryList;
-use Auth;
-use DB;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -83,7 +81,14 @@ class ItemController extends Controller
      */
     public function update(Request $request, Item $item)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'max:255',
+            'category_id' => 'exists:categories,id',
+            'emoji' => ''
+        ]);
+        $item->fill($validatedData);
+        $item->save();
+        return $item;
     }
 
     /**

@@ -35,5 +35,6 @@ Route::prefix('grocery')->middleware(['auth'])->group(function () {
         'category' => 'Grocery\CategoryController'
     ]);
     Route::get('/list/{list}/items', 'Grocery\ListItemController@items');
+    Route::put('/list/{list}/item/{item}', 'Grocery\ListItemController@update');
     Route::delete('/list/{list}/item/{item}', 'Grocery\ListItemController@destroy');
 });
