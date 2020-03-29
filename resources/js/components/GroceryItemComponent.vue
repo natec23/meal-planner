@@ -9,7 +9,8 @@
                 <a href="#" v-on:click.prevent="(editDetails ? editDetails = false : editDetails = true)">{{ item.name }}</a>
                 <span v-if="(item.pivot.qty != 1 || item.pivot.unit || item.pivot.notes)">
                     <br />
-                    {{ item.pivot.qty }} {{item.pivot.unit}}
+                    <span v-if="(item.pivot.qty != 1 || item.pivot.unit)">{{ item.pivot.qty }} {{item.pivot.unit}}</span>
+                    <span v-if="item.pivot.notes">{{ item.pivot.notes }}</span>
                 </span>
             </div>
             <div class="col-2 col-sm-1"><button class="btn-outline-dark" v-on:click="itemCheck">&nbsp;</button></div>
