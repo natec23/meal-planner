@@ -37,7 +37,7 @@ const groceryApp = new Vue({
     },
     methods: {
         addItem: function(event) {
-            axios.post(event.originalTarget.action, {
+            axios.post(event.target.action, {
                 list_id : this.list,
                 name : this.newItem
             }).then(function(){
