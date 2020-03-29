@@ -1,0 +1,40 @@
+<template>
+    <div>
+        <div v-for="category in categories" :key="category.id" class="card">
+            <div class="card-header" v-bind:style="{ 'background-color': category.color }" v-if="typeof groceryItems[category.id] != 'undefined'">{{ category.name }}</div>
+            <ul class="list-group list-group-flush">
+                <grocery-item v-for="item in groceryItems[category.id]" :key="item.id" v-bind:item="item" v-bind:list_id="list"></grocery-item>
+            </ul>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        data() {
+            return {
+                categories: [],
+                groceryItems: []
+            }
+        },
+        methods: {
+            categoriesResponse: function(response) {
+                this.categories = response.data;
+            },
+            getItems() {
+                axios.get('/grocery/list/'+this.list+'/items').then(this.itemsResponse);
+            },
+            itemsResponse: function(response) {
+                this.groceryItems = response.data;
+            },
+            itemDetails: function(item) {
+                console.log(item);
+            },
+        },
+        mounted: function() {
+            axios.get('/grocery/category').then(this.categoriesResponse);
+            this.getItems();
+        },
+        props: ['list']
+    }
+</script>

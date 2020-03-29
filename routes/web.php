@@ -14,9 +14,26 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if(Auth::check()) {
+        return redirect('grocery/list/1');
+    }
+    else {
+        return redirect('login');
+    }
 });
 
 Auth::routes(['register' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function(){
+    return redirect('grocery/list/1');
+})->name('home');
+
+Route::prefix('grocery')->middleware(['auth'])->group(function () {
+    Route::resources([
+        'list' => 'Grocery\ListController',
+        'item' => 'Grocery\ItemController',
+        'category' => 'Grocery\CategoryController'
+    ]);
+    Route::get('/list/{list}/items', 'Grocery\ListItemController@items');
+    Route::delete('/list/{list}/item/{item}', 'Grocery\ListItemController@destroy');
+});
