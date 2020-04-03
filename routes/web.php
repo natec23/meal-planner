@@ -38,3 +38,8 @@ Route::prefix('grocery')->middleware(['auth'])->group(function () {
     Route::put('/list/{list}/item/{item}', 'Grocery\ListItemController@update');
     Route::delete('/list/{list}/item/{item}', 'Grocery\ListItemController@destroy');
 });
+
+Route::middleware(['auth'])->group(function() {
+    Route::get('profile', 'ProfileController@index')->name('profile');
+    Route::post('change-password', 'ProfileController@changePassword');
+});
