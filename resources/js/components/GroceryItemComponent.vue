@@ -58,6 +58,7 @@
         methods: {
             itemProp: function() {
                 var self = this;
+                this.category = this.categories[this.item.category_id];
                 axios.post('/grocery/item/'+this.item.id, {
                     _method: 'PUT',
                     'category_id': this.item.category_id,

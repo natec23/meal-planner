@@ -15,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return Category::orderBy('sort', 'ASC')->get();
+        return Category::orderBy('sort', 'ASC')->get()->keyBy('id');
     }
 
     /**
