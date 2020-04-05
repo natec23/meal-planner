@@ -44,7 +44,7 @@ class RecipieController extends Controller
         $recipie->author_id = Auth::id();
         $recipie->save();
 
-        return redirect(route('recipie.show', $recipie));
+        return redirect(route('recipie.edit', $recipie));
     }
 
     /**
