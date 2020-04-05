@@ -158,7 +158,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                             <label for="ingredient-name">Name</label>
-                            <input type="text" class="form-control" name="ingredient-name" id="ingredient-name" v-model="ingredientEdit.name" required />
+                            <input type="text" class="form-control" name="ingredient-name" id="ingredient-name" v-model="ingredientEdit.item.name" required />
                             </div>
                             <div class="form-group">
                             <label for="ingredient-amount">Amount</label>

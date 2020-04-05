@@ -26,7 +26,6 @@ const app = new Vue({
             this.directionModal({});
         },
         directionModal: function(edit) {
-            edit._token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
             this.directionEdit = edit;
             this.modalDirection = true;
         },
@@ -57,16 +56,18 @@ const app = new Vue({
         },
         // opens the modal to create a new ingredient
         ingredientModal: function(edit) {
-            edit._token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            if(edit.item) {
-                edit.name = edit.item.name;
+            if(!edit.item) {
+                edit.item = {};
             }
             this.ingredientEdit = edit;
             this.modalIngredient = true;
         },
         saveIngredient: function() {
+            var data = this.ingredientEdit;
+            data.name = data.item.name;
+            delete data.item;
             if(this.ingredientEdit.id) {
-                this.ingredientEdit._method = 'PUT';
+                data._method = 'PUT';
                 axios.post('/recipies/ingredient/'+this.ingredientEdit.id, this.ingredientEdit)
                 .then(this.getIngredients);
             }
