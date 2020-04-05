@@ -58,6 +58,9 @@ const app = new Vue({
         // opens the modal to create a new ingredient
         ingredientModal: function(edit) {
             edit._token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            if(edit.item) {
+                edit.name = edit.item.name;
+            }
             this.ingredientEdit = edit;
             this.modalIngredient = true;
         },

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Grocery\Item;
 use App\Models\Recipies\Recipie;
 use App\Models\Recipies\RecipieIngredient;
-use Illuminate\Http\Request;
+use App\Http\Requests\Recipies\IngredientRequest;
 
 class IngredientController extends Controller
 {
@@ -26,7 +26,7 @@ class IngredientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Recipie $recipie)
+    public function store(IngredientRequest $request, Recipie $recipie)
     {
         $last = RecipieIngredient::recipie($recipie->id)->orderBy('sort', 'DESC')->first();
         $nextSort = ($last ? $last->sort : 1);
@@ -47,9 +47,9 @@ class IngredientController extends Controller
      * @param  \App\Recipies\RecipieIngredient  $recipieIngredient
      * @return \Illuminate\Http\Response
      */
-    public function show(RecipieIngredient $recipieIngredient)
+    public function show(RecipieIngredient $ingredient)
     {
-        //
+        return $ingredient;
     }
 
     /**
@@ -59,7 +59,7 @@ class IngredientController extends Controller
      * @param  \App\Recipies\RecipieIngredient  $recipieIngredient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RecipieIngredient $ingredient)
+    public function update(IngredientRequest $request, RecipieIngredient $ingredient)
     {
         $ingredient->fill($request->all());
         $ingredient->save();

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Grocery\Item;
 use App\Models\Recipies\Recipie;
 use App\Models\Recipies\RecipieDirection;
-use Illuminate\Http\Request;
+use App\Http\Requests\Recipies\DirectionRequest;
 
 class DirectionController extends Controller
 {
@@ -21,22 +21,12 @@ class DirectionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Recipie $recipie)
+    public function store(DirectionRequest $request, Recipie $recipie)
     {
         $last = RecipieDirection::recipie($recipie->id)->orderBy('sort', 'DESC')->first();
         $nextSort = ($last ? $last->sort : 1);
@@ -54,9 +44,9 @@ class DirectionController extends Controller
      * @param  \App\Recipies\RecipieDirection  $recipieDirection
      * @return \Illuminate\Http\Response
      */
-    public function show(RecipieDirection $recipieDirection)
+    public function show(RecipieDirection $direction)
     {
-        //
+        return $direction;
     }
 
     /**
@@ -66,7 +56,7 @@ class DirectionController extends Controller
      * @param  \App\Recipies\RecipieDirection  $recipieDirection
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RecipieDirection $direction)
+    public function update(DirectionRequest $request, RecipieDirection $direction)
     {
         $direction->fill($request->all());
         $direction->save();
