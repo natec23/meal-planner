@@ -61,8 +61,23 @@ class IngredientController extends Controller
      */
     public function update(IngredientRequest $request, RecipieIngredient $ingredient)
     {
+        // grab new item if name has changed
+        if($ingredient->item->name != $request->name) {
+            $old_item_id = $ingredient->item->id;
+            $item = Item::firstOrCreate(['name' => $request->name]);
+            $ingredient->item_id = $item->id;
+        }
+
         $ingredient->fill($request->all());
         $ingredient->save();
+
+        // delete the old item if it's not associated with anything else
+        if(isset($old_item_id)) {
+            $item = Item::where('id', $old_item_id)->withCount(['ingredients', 'lists'])->get()->first();
+            if($item->lists_count == 0 && $item->ingredients_count == 0) {
+                $item->delete();
+            }
+        }
     }
 
     /**
