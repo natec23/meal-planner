@@ -28,3 +28,6 @@ var list_id = {{$list->id}};
 </script>
 @endsection
 
+@section('scripts')
+<script src="{{ asset('js/grocery.js') }}" defer></script>
+@endsection
