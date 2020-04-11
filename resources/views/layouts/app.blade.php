@@ -37,7 +37,12 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item {{ (Request::is('grocery/*') ? 'active' : '') }}">
+                            <a href="{{ url('grocery/list/1') }}" class="nav-link">Grocery</a>
+                        </li>
+                        <li class="nav-item {{ (Request::is('recipies/*') ? 'active' : '') }}">
+                            <a href="{{ route('recipie.index') }}" class="nav-link">Recipies</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
