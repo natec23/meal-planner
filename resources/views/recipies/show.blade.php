@@ -4,6 +4,7 @@
 <div id="recipie-container" class="container">
     <div class="card">
         <div class="card-header">
+            <a href="{{ route('recipie.edit', $recipie) }}" class="btn float-right"><i class="far fa-edit"></i></a>
             <h1>{{ $recipie->name }}</h1>
         </div>
         <div class="card-body">
