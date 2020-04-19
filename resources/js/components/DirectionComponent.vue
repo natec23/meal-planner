@@ -3,10 +3,10 @@
         <button type="button" v-if="edit" class="float-right btn" v-on:click="editDirection"><i class="fas fa-edit"></i></button>
         <span v-if="direction.heading">
             <h3 style="display:inline;">{{ direction.heading }}</h3>
-            <p>{{ direction.details }}</p>
+            <p v-html="direction.details_html"></p>
         </span>
         <span v-else>
-            <h3 style="display:inline;">{{ direction.details }}</h3>
+            <h3 style="display:inline;" v-html="direction.details_html"></h3>
         </span>
     </li>
 </template>

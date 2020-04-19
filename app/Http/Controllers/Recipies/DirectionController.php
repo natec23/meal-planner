@@ -17,7 +17,20 @@ class DirectionController extends Controller
      */
     public function index(Recipie $recipie)
     {
-        return RecipieDirection::recipie($recipie->id)->orderBy('sort', 'ASC')->get();
+        // return RecipieDirection::recipie($recipie->id)->orderBy('sort', 'ASC')->get();
+        $directions = RecipieDirection::recipie($recipie->id)->orderBy('sort', 'ASC')->get();
+
+        foreach($directions as $direction) {
+            $direction['details_html'] = $details = $direction['details'];
+            preg_match_all('/\{[^\{\}]+\}/', $details, $matches);
+
+            $direction['matches'] = $matches;
+            foreach($matches[0] as $match) {
+                $direction['details_html'] = str_replace($match, '<a href="#">'.substr($match, 1 -1).'</a>', $direction['details_html']);
+            }
+        }
+
+        return $directions;
     }
 
     /**

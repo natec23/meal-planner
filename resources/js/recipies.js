@@ -29,6 +29,10 @@ const app = new Vue({
             this.directionEdit = edit;
             this.modalDirection = true;
         },
+        directionIngredient: function(ingredient) {
+            this.directionEdit.details = this.directionEdit.details + '{'+ingredient.item.name+'}';
+            console.log(ingredient.item.name);
+        },
         saveDirection: function() {
             if(this.directionEdit.id) {
                 this.directionEdit._method = 'PUT';

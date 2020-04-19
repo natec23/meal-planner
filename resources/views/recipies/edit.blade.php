@@ -122,6 +122,11 @@
                            <label for="direction-detail">Details</label>
                            <textarea class="form-control" name="direction-detail" id="direction-detail" v-model="directionEdit.details"></textarea>
                         </div>
+                        <ul class="list-group list-group-horizontal">
+                            <li v-for="ingredient in ingredients" v-bind:key="ingredient.id" class="list-group-item">
+                                <a href="#" v-on:click.prevent="directionIngredient(ingredient)">@{{ ingredient.item.name }}</a>
+                            </li>
+                        </ul>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" @click="modalDirection = false">Close</button>
