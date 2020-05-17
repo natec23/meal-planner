@@ -9,11 +9,7 @@
         </div>
         <div class="card-body">
             @php
-            $columns = 0;
-            if($recipie->oven_temp) { $columns++; }
-            if($recipie->prep_time) { $columns++; }
             if($recipie->cook_time) {
-                $columns++;
                 if($recipie->cook_time >= 60) {
                     $hours = floor($recipie->cook_time / 60);
                     $minutes = $recipie->cook_time % 60;
@@ -23,44 +19,40 @@
                     $minutes = $recipie->cook_time;
                 }
             }
-            if($recipie->yield) { $columns++; }
             @endphp
-            @if($columns > 0)
-                @php $columns = 12 / $columns; @endphp
-                <div class="row">
-                    @if($recipie->yield)
-                        <div class="col-sm-{{$columns}}">
-                            @if(strtolower($recipie->yield_unit) == 'servings')
-                                <i class="fas fa-utensils"></i>
-                            @else
-                                <i class="fas fa-weight"></i>
-                            @endif
-                            Yield: {{ $recipie->yield.' - '.$recipie->yield_unit}}
-                        </div>
-                    @endif
-                    @if($recipie->prep_time)
-                        <div class="col-sm-{{$columns}}">
-                            <i class="far fa-clock"></i> Prep: {{ $recipie->prep_time}}
-                        </div>
-                    @endif
-                    @if($recipie->cook_time)
-                        <div class="col-sm-{{$columns}}">
-                            <i class="far fa-clock"></i> Cook:
-                            @if($hours >= 1)
-                                {{ $hours }} hours
-                            @endif
-                            @if($minutes > 0)
-                                {{ $minutes }} m
-                            @endif
-                        </div>
-                    @endif
-                    @if($recipie->oven_temp)
-                        <div class="col-sm-{{$columns}}">
-                            <i class="fas fa-thermometer-three-quarters"></i> {{ $recipie->oven_temp}}&#176;
-                        </div>
-                    @endif
-                </div>
-            @endif
+            <div class="row">
+                @if($recipie->yield)
+                    <div class="col-sm">
+                        @if(strtolower($recipie->yield_unit) == 'servings')
+                            <i class="fas fa-utensils"></i>
+                        @else
+                            <i class="fas fa-weight"></i>
+                        @endif
+                        Yield: {{ $recipie->yield.' - '.$recipie->yield_unit}}
+                    </div>
+                @endif
+                @if($recipie->prep_time)
+                    <div class="col-sm">
+                        <i class="far fa-clock"></i> Prep: {{ $recipie->prep_time}}
+                    </div>
+                @endif
+                @if($recipie->cook_time)
+                    <div class="col-sm">
+                        <i class="far fa-clock"></i> Cook:
+                        @if($hours >= 1)
+                            {{ $hours }} hours
+                        @endif
+                        @if($minutes > 0)
+                            {{ $minutes }} m
+                        @endif
+                    </div>
+                @endif
+                @if($recipie->oven_temp)
+                    <div class="col-sm">
+                        <i class="fas fa-thermometer-three-quarters"></i> {{ $recipie->oven_temp}}&#176;
+                    </div>
+                @endif
+            </div>
             {{ $recipie->notes }}
         </div>
 
