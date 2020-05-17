@@ -68,18 +68,6 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-sm-8">
-            <div class="card">
-                <div class="card-header">
-                    <h2>Directions</h2>
-                </div>
-                <div class="card-body">
-                    <ol class="list-group list-group-flush" style="list-style: decimal inside;">
-                        <recipie-direction v-for="direction in directions" v-bind:key="direction.id" v-bind:direction="direction" v-bind:edit="false"></recipie-direction>
-                    </ol>
-                </div>
-            </div>
-        </div>
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-header">
@@ -89,6 +77,18 @@
                     <ul class="list-group list-group-flush">
                         <recipie-ingredient v-for="ingredient in ingredients" v-bind:key="ingredient.id" v-bind:ingredient="ingredient" v-bind:edit="false"></recipie-ingredient>
                     </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Directions</h2>
+                </div>
+                <div class="card-body">
+                    <ol class="list-group list-group-flush" style="list-style: decimal inside;">
+                        <recipie-direction v-for="direction in directions" v-bind:key="direction.id" v-bind:direction="direction" v-bind:edit="false"></recipie-direction>
+                    </ol>
                 </div>
             </div>
         </div>
